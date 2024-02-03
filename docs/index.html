@@ -1,8 +1,60 @@
 <html>
-    <form action="/form.php" method="post">
-        <div>
-            <label for="message">内容</label>
-            <textarea id="message" name="message"　cols="150" rows="10"></textarea>
-        </div>
-    </form>
+    <head><meta charset="utf-8"></head>
+    <body>
+        <form action="/form.php" method="post">
+            <div>
+                <p id="quote">ハンジ：さあ今日も頑張って書いていこうか！</p>
+                <label for="contents">内容
+                    <textarea id="contents" name="contents" cols="80" rows="30"></textarea>
+                </label>
+            </div>
+        </form>
+    </body>
+    <script>
+        const REF_CNT = 10; //セリフ更新文字数
+        const HANS_QUOTES = [
+            'よく頑張ってるね！',
+            '頑張ってるね！{name}の頑張りを見られて嬉しいよ',
+            'この文章、すっっごく滾るよ',
+            '一歩一歩の積み重ねが素晴らしい作品を作るんだ',
+            '{count}文字！たくさん書いたね！',
+            '{count}文字も書いて疲れただろう。お疲れ様！',
+            'えっ？まだ書くの？{name}は頑張り屋さんだね',
+            'ねぇリヴァイ見てよ！この子もうこんなに書いたんだよ！'
+        ];
+
+        // HTML要素
+        const contentsElem = document.getElementById('contents');
+        const quoteElem = document.getElementById('quote');
+        let bfrSize = 0;
+
+        // テキストエリアに入力された
+        contentsElem.addEventListener('input', (event) => {
+            const txtData = contentsElem.value;
+            if (txtData.length - bfrSize >= REF_CNT) {
+                // セリフ更新文字数を超えたらセリフを更新
+                bfrSize = txtData.length;
+                refreshQuote(txtData.length);
+            } else if(txtData.length < bfrSize) {
+                // 文字削除時は元文字数を更新する
+                bfrSize = txtData.length;
+            }
+        });
+
+        // セリフ更新
+        function refreshQuote(len) {
+            let newQuote;
+            //ランダムに選ぶ
+            const num = Math.floor(Math.random() * HANS_QUOTES.length);
+            quoteElem.textContent = replace(HANS_QUOTES[num], {name: '君', count: String(len)});
+        }
+
+        // 置換処理
+        function replace(template, replacement) {
+            return template.replace(/\{(.+?)\}/g, function(m, c)
+            {
+                return (replacement[c] != null) ? replacement[c] : m
+            });
+        }
+    </script>
 </html>
