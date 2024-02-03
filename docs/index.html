@@ -1,12 +1,21 @@
 <html>
-    <head><meta charset="utf-8"></head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
     <body>
-        <form action="/form.php" method="post">
-            <div>
-                <label for="myName">名前：<input id="myName" name="myName"></input></label>
-                <div>ハンジ「<span id="quote">さあ今日も頑張って書いていこうか！</span>」</div>
-                <textarea id="contents" name="contents" cols="80" rows="30"></textarea>
-                <div><span id="currentLen"></span>文字</div>
+        <form>
+            <div class="m-4">
+                <input id="quote" name="quote" readonly value="やあ、よく来たね。今日も頑張って書いていこうか！" class="form-control-plaintext" style="color:purple;"></input>
+                <textarea id="contents" name="contents" class="form-control" rows="10" placeholder="文章を入力してください"></textarea>
+                <div class="mb-4"><span id="currentLen">0</span>文字</div>   
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">追加設定</h5>
+                      <input id="myName" name="myName" class="form-control" placeholder="名前を入力（未入力の場合は「きみ」）"></input>
+                    </div>
+                </div>
             </div>
         </form>
     </body>
@@ -21,11 +30,11 @@
             'できあがったらぜひ一番に私に読ませてほしいよ！',
             '頑張ってるね！{name}の頑張りを見られて嬉しいよ',
             'この文章、すっっごく滾るよ',
-            '一歩一歩の積み重ねが素晴らしい作品を作るんだ',
+            '一文字一文字の積み重ねが素晴らしい作品を作るんだ',
             '{count}文字！たくさん書いたね！',
             '{count}文字も書いて疲れただろう。お疲れ様！',
             'えっ？まだ書くの？{name}は頑張り屋さんだね',
-            'ねぇリヴァイ見てよ！この子もうこんなに書いたんだよ！'
+            'ねぇリヴァイ見てよ！この子もうこんなに書いたんだよ！',
         ];
 
         // HTML要素取得
@@ -56,7 +65,7 @@
             let newQuote;
             //ランダムに選ぶ
             const num = Math.floor(Math.random() * HANS_QUOTES.length);
-            quoteElem.textContent = replace(HANS_QUOTES[num], {name: myName, count: String(len)});
+            quoteElem.value = replace(HANS_QUOTES[num], {name: myName, count: String(len)});
         }
 
         // 置換処理
@@ -67,4 +76,7 @@
             });
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>
