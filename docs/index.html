@@ -3,17 +3,22 @@
     <body>
         <form action="/form.php" method="post">
             <div>
-                <p id="quote">ハンジ：さあ今日も頑張って書いていこうか！</p>
-                <label for="contents">内容
-                    <textarea id="contents" name="contents" cols="80" rows="30"></textarea>
-                </label>
+                <label for="myName">名前：<input id="myName" name="myName"></input></label>
+                <div>ハンジ「<span id="quote">さあ今日も頑張って書いていこうか！</span>」</div>
+                <textarea id="contents" name="contents" cols="80" rows="30"></textarea>
+                <div><span id="currentLen"></span>文字</div>
             </div>
         </form>
     </body>
     <script>
-        const REF_CNT = 10; //セリフ更新文字数
+        // セリフ更新文字数
+        const REF_CNT = 10;
+
+        // ハンジセリフ
         const HANS_QUOTES = [
             'よく頑張ってるね！',
+            'すごい！',
+            'できあがったらぜひ一番に私に読ませてほしいよ！',
             '頑張ってるね！{name}の頑張りを見られて嬉しいよ',
             'この文章、すっっごく滾るよ',
             '一歩一歩の積み重ねが素晴らしい作品を作るんだ',
@@ -23,14 +28,18 @@
             'ねぇリヴァイ見てよ！この子もうこんなに書いたんだよ！'
         ];
 
-        // HTML要素
+        // HTML要素取得
         const contentsElem = document.getElementById('contents');
         const quoteElem = document.getElementById('quote');
-        let bfrSize = 0;
+        const currentLenElem = document.getElementById('currentLen');
+        const myNameElem = document.getElementById('myName');
+        currentLenElem.textContent = '0';
 
-        // テキストエリアに入力された
+        let bfrSize = 0;
+        // テキストエリア入力イベント
         contentsElem.addEventListener('input', (event) => {
             const txtData = contentsElem.value;
+            currentLenElem.textContent = String(contentsElem.value.length);
             if (txtData.length - bfrSize >= REF_CNT) {
                 // セリフ更新文字数を超えたらセリフを更新
                 bfrSize = txtData.length;
@@ -43,10 +52,11 @@
 
         // セリフ更新
         function refreshQuote(len) {
+            const myName = myNameElem.value.length == 0 ? 'きみ' : myNameElem.value;
             let newQuote;
             //ランダムに選ぶ
             const num = Math.floor(Math.random() * HANS_QUOTES.length);
-            quoteElem.textContent = replace(HANS_QUOTES[num], {name: '君', count: String(len)});
+            quoteElem.textContent = replace(HANS_QUOTES[num], {name: myName, count: String(len)});
         }
 
         // 置換処理
