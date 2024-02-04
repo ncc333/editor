@@ -3,7 +3,7 @@
     top: 30%;
     display: flex;
     align-items: center;
-    margin: 0 0 0 15px;
+    margin: 0 5px 0 15px;
     padding: 7px 10px;
     min-width: 120px;
     max-width: 100%;
@@ -14,14 +14,14 @@
     min-height: 30px;
   }
   
-  .balloon:before {
+  .balloon:after {
     content: "";
     position: absolute;
-    top: 70%;
-    left: -20px;
+    top: 80%;
+    right: -20px;
     margin-top: -15px;
     border: 5px solid transparent;
-    border-right: 18px solid #f3dfff;
+    border-left: 18px solid #f3dfff;
   }
   
   .balloon p {
@@ -39,7 +39,7 @@
     }
   
     50% {
-      opacity: 10;
+      opacity: 50;
     }
   
     100% {
