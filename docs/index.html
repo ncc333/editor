@@ -8,7 +8,7 @@
     <body>
         <form>
             <div class="m-4">
-                <div class="balloon">
+                <div id="balloon" class="balloon fadeinout">
                     <p id="quote" name="quote">やあ、よく来たね。今日も一緒に書いていこうか</p>
                 </div>
                 <textarea id="contents" name="contents" class="form-control" rows="10" placeholder="文章を入力してください"></textarea>
@@ -29,10 +29,11 @@
         // ハンジセリフ
         const HANS_QUOTES = [
             'よく頑張ってるね！',
-            'すごい！',
+            '素敵な表現だね',
+            'リヴァイからも聞いているよ。いつも{name}が頑張ってるって',
             'できあがったらぜひ一番に私に読ませてほしいよ！',
             '頑張ってるね！{name}の頑張りを見られて嬉しいよ',
-            'この文章、すっっごく滾るよ',
+            'この文章、すっっごく滾るよ！',
             '一文字一文字の積み重ねが素晴らしい作品を作るんだ',
             '{count}文字！たくさん書いたね！',
             '{count}文字も書いて疲れただろう。お疲れ様！',
@@ -44,6 +45,7 @@
         // HTML要素取得
         const contentsElem = document.getElementById('contents');
         const quoteElem = document.getElementById('quote');
+        const balloonElem = document.getElementById('balloon');
         const currentLenElem = document.getElementById('currentLen');
         const myNameElem = document.getElementById('myName');
         currentLenElem.textContent = '0';
@@ -57,6 +59,9 @@
                 // セリフ更新文字数を超えたらセリフを更新
                 bfrSize = txtData.length;
                 refreshQuote(txtData.length);
+                balloonElem.classList.remove('fadeinout');
+                balloonElem.offsetWidth = balloonElem.offsetWidth;
+                balloonElem.classList.add('fadeinout');
             } else if(txtData.length < bfrSize) {
                 // 文字削除時は元文字数を更新する
                 bfrSize = txtData.length;
