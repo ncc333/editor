@@ -2,12 +2,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="common.css" rel="stylesheet" type="text/css" media="all">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
         <form>
             <div class="m-4">
-                <input id="quote" name="quote" readonly value="やあ、よく来たね。今日も頑張って書いていこうか！" class="form-control-plaintext" style="color:purple;"></input>
+                <div class="balloon">
+                    <p id="quote" name="quote">やあ、よく来たね。今日も一緒に書いていこうか</p>
+                </div>
                 <textarea id="contents" name="contents" class="form-control" rows="10" placeholder="文章を入力してください"></textarea>
                 <div class="mb-4"><span id="currentLen">0</span>文字</div>   
                 <div class="card">
@@ -35,6 +38,7 @@
             '{count}文字も書いて疲れただろう。お疲れ様！',
             'えっ？まだ書くの？{name}は頑張り屋さんだね',
             'ねぇリヴァイ見てよ！この子もうこんなに書いたんだよ！',
+            '{name}を見ていると私も頑張れる気がするよ',
         ];
 
         // HTML要素取得
@@ -65,7 +69,7 @@
             let newQuote;
             //ランダムに選ぶ
             const num = Math.floor(Math.random() * HANS_QUOTES.length);
-            quoteElem.value = replace(HANS_QUOTES[num], {name: myName, count: String(len)});
+            quoteElem.textContent = replace(HANS_QUOTES[num], {name: myName, count: String(len)});
         }
 
         // 置換処理
@@ -79,4 +83,4 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</html>
+    </html>
