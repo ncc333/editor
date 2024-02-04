@@ -1,9 +1,10 @@
 .balloon {
     position: absolute;
     top: 30%;
+    left: 5px;
     display: flex;
     align-items: center;
-    margin: 0 5px 0 15px;
+    margin: 0 15px 0 5px;
     padding: 7px 10px;
     min-width: 120px;
     max-width: 100%;
